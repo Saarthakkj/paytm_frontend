@@ -1,19 +1,26 @@
 import { useState } from "react";
-import './Signup.css';
-
+import "./Signup.css";
+import { UserSchema } from "./types.ts";
+import { Link, Route, Routes } from "react-router-dom";
 
 export default function Signup() {
   //useState is a react hook , returns tqwo values
   // firs-> state
   //second -> function that updates state
   //value passed in useState is the default value of the state.
-  const [name, setName] = useState("");
+  const [FirstName, setFirstname] = useState("");
+  const [LastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
-  const handleName = (e) => {
-    setName(e.target.value);
+
+  const handleFirstname = (e) => {
+    setFirstname(e.target.value);
+    setSubmitted(false);
+  };
+  const handleLastname = (e) => {
+    setLastname(e.target.value);
     setSubmitted(false);
   };
   const handleEmail = (e) => {
@@ -27,12 +34,16 @@ export default function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const response = UserSchema.safeParse({ name, email, password });
     //here 'e' doesn't mean error but EVENT OBJECT
     //deafult behaviour of this form-submit button -> to reload
     //preventDeefault() -> to prevent this
-    if (name === "" || email === "" || password === "") {
+
+    if (!response.success) {
       setError(true);
+      //console.log("All fields are mandatory!");
     } else {
+      console.log("Form is submitted!");
       setError(false);
       setSubmitted(true);
     }
@@ -40,22 +51,24 @@ export default function Signup() {
 
   const successMessage = () => {
     return (
-      <div className = "success" style ={
-        {
-          display : submitted ? "" :  "none"
-        }
-      }>
-        <h1> Form is submitted!</h1>
+      <div
+        className="success"
+        style={{
+          display: submitted ? "" : "none",
+        }}
+      >
+        <h3> Form is submitted!</h3>
       </div>
     );
   };
   const errorMessage = () => {
     return (
-      <div className = "success" style ={
-        {
-          display : !submitted ? "" :  "none"
-        }
-      }>
+      <div
+        className="error"
+        style={{
+          display: !submitted ? "" : "none",
+        }}
+      >
         <h3> All fields are mandatory!</h3>
       </div>
     );
@@ -63,39 +76,70 @@ export default function Signup() {
 
   return (
     <div className="form">
-      <div>
-        <h1> Signup</h1>
+      <div className="title">
+        <h1> Sign Up</h1>
       </div>
-      <div className="messages">
+      <div className="subtitle">
+        Enter your information to create an account.
+      </div>
+      {/* <div className="messages">
         {errorMessage()}
         {successMessage()}
-      </div>
-      <form>
-        <label className="label"> Name</label>
+      </div> */}
+      <form className="fields">
+        <label className="label">
+          {" "}
+          <b>First Name</b>
+        </label>
         <input
-          onChange={handleName}
+          onChange={handleFirstname}
           className="input"
-          value={name}
+          value={FirstName}
           type="text"
-        /><br></br>
-        <label className="label"> Email</label>
+        />
+        <br></br>
+        <label className="label">
+          {" "}
+          <b>Last Name</b>
+        </label>
+        <input
+          onChange={handleLastname}
+          className="input"
+          value={LastName}
+          type="text"
+        />
+        <br></br>
+        <label className="label">
+          {" "}
+          <b>Email</b>
+        </label>
         <input
           onChange={handleEmail}
           className="input"
           value={email}
           type="email"
-        /><br></br>
-        <label className="label"> Password</label>
+        />
+        <br></br>
+        <label className="label">
+          {" "}
+          <b>Password</b>
+        </label>
         <input
           onChange={handlePassword}
           className="input"
           value={password}
           type="password"
-        /><br></br>
-        <button onClick={handleSubmit} className="button">
-          Submit
-        </button>
+        />
+        <br></br>
       </form>
+      <button onClick={handleSubmit} className="submit">
+        Sign Up
+      </button>
+
+      <div className="account-link">
+        Already have an account?
+        <Link to="/signin">Sign In</Link>
+      </div>
     </div>
   );
 }

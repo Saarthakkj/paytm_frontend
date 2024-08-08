@@ -1,12 +1,90 @@
+body {
+    font-family: Arial, sans-serif; /* Example font style */
+}
 .form{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color : white;
     align-items: center;
-    margin-top: 50px;
-    padding: 20px;
-    border: 1px solid #000;
     border-radius: 10px;
-    width: 50%;
+    width: 25%;
+    height : 90%;
     margin: 0 auto;
+}
+.title{
+    font-size: 1rem;
+    margin: 1rem;
+    position: relative;
+    top: 5px; left: 0px;
+}
+.subtitle{
+    font-size: 1rem;
+    color : gray;
+    text-align : center;
+    margin: 1rem;
+    position: relative;
+    bottom: 40px; left: 0px;
+}
+.messages{
+    font-size: 0.8rem;
+    margin: 1rem;
+    position: relative;
+    top: -55px; left: 0px;
+}
+.fields{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    margin: 1rem;
+    position: relative;
+    top: -40px; right: 40px;
+}
+.label{
+    align-items : left;
+    position : relative;
+    top : -5px; right : 10px;
+}
+.input{
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    position : relative;
+    top : -5px; right : 10px;
+}
+.submit{
+   color : white;
+   background-color : black;
+    border-radius: 5px;
+    align-items : center;
+    width : 80%;
+    padding: 0.5rem;
+    position : relative;
+    bottom : 60px; right : 0px;
+}
+.account-link {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    position : relative;
+    bottom : 70px; right : 0px;
+}
+.success{
+    color : white;
+    background-color : green;
+    font-size: 0.8rem;
+    margin: 1rem;
+    position: relative;
+    top: -15px; left: 0px;
+}
+.error{
+    color : red;
+    background-color : ebedef;
+    font-size: 0.8rem;
+    margin: 1rem;
+    position: relative;
+    top: -15px; left: 0px;
 }
